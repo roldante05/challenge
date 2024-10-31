@@ -1,0 +1,54 @@
+version: '3.8'
+services:
+  # Contenedor de la aplicación Laravel
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: torneo_tennis_app
+    working_dir: /var/www/html
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8000:8000
+    networks:
+      - torneo_network
+    depends_on:
+      - db
+
+  # Contenedor de MySQL
+  db:
+    image: mysql:8.0
+    container_name: torneo_tennis_db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: torneo-tennis
+      MYSQL_USER: dante
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+    networks:
+      - torneo_network
+    volumes:
+      - dbdata:/var/lib/mysql
+
+  # Contenedor opcional para phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: torneo_tennis_phpmyadmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: root_password
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    networks:
+      - torneo_network
+
+networks:
+  torneo_network:
+    driver: bridge
+
+volumes:
+  dbdata:
