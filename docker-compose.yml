@@ -9,12 +9,24 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-    ports:
-      - 8000:8000
     networks:
       - torneo_network
     depends_on:
       - db
+
+  # Contenedor de Nginx
+  web:
+    image: nginx:latest
+    container_name: torneo_tennis_web
+    ports:
+      - 8000:80
+    volumes:
+      - .:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - torneo_network
+    depends_on:
+      - app
 
   # Contenedor de MySQL
   db:

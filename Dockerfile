@@ -23,5 +23,5 @@ COPY . .
 RUN composer install
 
 # Exponer el puerto
-EXPOSE 9000
+EXPOSE 8000
 CMD ["php-fpm"]
