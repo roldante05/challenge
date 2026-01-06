@@ -1,66 +1,56 @@
-version: '3.8'
 services:
   # Contenedor de la aplicación Laravel
-  app:
+  laravel.test:
     build:
-      context: .
+      context: ./vendor/laravel/sail/runtimes/8.1
       dockerfile: Dockerfile
-    container_name: torneo_tennis_app
-    working_dir: /var/www/html
-    volumes:
-      - .:/var/www/html
-    networks:
-      - torneo_network
-    depends_on:
-      - db
-
-  # Contenedor de Nginx
-  web:
-    image: nginx:latest
-    container_name: torneo_tennis_web
+      args:
+        WWWGROUP: '${WWWGROUP}'
+    image: sail-8.1/app
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
-      - 8000:80
+      - '${APP_PORT:-80}:80'
+      - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+    environment:
+      WWWUSER: '${WWWUSER}'
+      LARAVEL_SAIL: 1
+      XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
+      XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
     volumes:
-      - .:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - '.:/var/www/html'
     networks:
       - torneo_network
     depends_on:
-      - app
+      - mysql
 
   # Contenedor de MySQL
-  db:
-    image: mysql:8.0
-    container_name: torneo_tennis_db
-    environment:
-      MYSQL_ROOT_PASSWORD: root_password
-      MYSQL_DATABASE: torneo-tennis
-      MYSQL_USER: dante
-      MYSQL_PASSWORD: password
+  mysql:
+    image: mysql/mysql-server:8.0
     ports:
-      - 3306:3306
-    networks:
-      - torneo_network
+      - '${FORWARD_DB_PORT:-3306}:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_DATABASE: '${DB_DATABASE}'
+      MYSQL_USER: '${DB_USERNAME}'
+      MYSQL_PASSWORD: '${DB_PASSWORD}'
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
     volumes:
-      - dbdata:/var/lib/mysql
-
-  # Contenedor opcional para phpMyAdmin
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: torneo_tennis_phpmyadmin
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: root_password
-    ports:
-      - 8080:80
-    depends_on:
-      - db
+      - 'sail-mysql:/var/lib/mysql'
+      - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
     networks:
       - torneo_network
-
+    healthcheck:
+        test:
+            - CMD
+            - mysqladmin
+            - ping
+            - '-p${DB_PASSWORD}'
+        retries: 3
+        timeout: 5s  
 networks:
   torneo_network:
-    driver: bridge
-
+    external: true
 volumes:
-  dbdata:
+  sail-mysql:
+    driver: local
