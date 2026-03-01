@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        color-scheme: dark;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+        background: #0F172A;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: #FF2D20;
+        border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FF4D42;
+    }
+}
+
+@layer utilities {
+    /* Horizontal scroll carousels */
+    .carousel-scroll {
+        @apply flex gap-4 overflow-x-auto pb-4;
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .carousel-scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .carousel-scroll > * {
+        scroll-snap-align: start;
+        flex-shrink: 0;
+    }
+
+    /* Card hover lift */
+    .card-hover {
+        @apply transition-all duration-300 ease-out;
+    }
+    .card-hover:hover {
+        @apply scale-105 shadow-2xl shadow-black/50 z-10;
+    }
+
+    /* Text shadow for hero text */
+    .text-shadow {
+        text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    /* Glass effect */
+    .glass {
+        @apply bg-slate-900/70 backdrop-blur-md border border-slate-700/50;
+    }
+}
