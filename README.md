@@ -1,66 +1,160 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tv FlexDan
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plataforma de streaming demostrativa inspirada en Netflix, desarrollada con Laravel y Livewire.
 
-## About Laravel
+## Descripción General
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+**Tv FlexDan** es una aplicación web diseñada para mostrar un catálogo dinámico de películas, series y canales de televisión argentinos. Es un proyecto de carácter **demostrativo** y educativo que busca replicar la experiencia de usuario (UX) y la estética visual de plataformas líderes como Netflix, enfocándose en la fluidez de la interfaz sin recargas de página.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tecnologías Utilizadas
 
-## Learning Laravel
+El proyecto utiliza un stack moderno y eficiente:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Laravel 10+**: Core del backend.
+- **Livewire v3/v4**: Para la interactividad en tiempo real sin salir de PHP.
+- **Blade**: Motor de plantillas para la estructura base.
+- **Tailwind CSS**: Para un diseño responsivo y estilizado (v3).
+- **TMDB API**: Fuente de metadatos para películas y series.
+- **Guzzle / Laravel HTTP Client**: Para el consumo de APIs externas.
+- **Cache**: Implementación de almacenamiento temporal para optimizar el rendimiento y las cuotas de API.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Funcionalidades Principales
 
-## Laravel Sponsors
+- **Home Dinámica**: Banner principal con contenido en tendencia y carruseles por categoría.
+- **Carruseles Livewire**: Navegación horizontal fluida para películas y series populares.
+- **Catálogo Filtrable**: Listados completos de películas y series con filtros por género.
+- **Vistas de Detalle**: Información completa, ratings, fechas de estreno y reparto principal.
+- **Canales de TV Argentinos**: Grid interactivo con datos mockeados y detalles en modales con efecto glassmorphism.
+- **Carga Asíncrona**: Navegación y filtrado instantáneo gracias a la potencia de Livewire.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+## Requisitos Previos
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Antes de comenzar, asegúrate de tener instalado:
 
-## Contributing
+- **PHP 8.1+**
+- **Composer**
+- **Node.js & npm**
+- **Docker / Laravel Sail** (recomendado para el entorno local)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## Instalación del Proyecto
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Sigue estos pasos para configurar el proyecto en tu entorno local:
 
-## Security Vulnerabilities
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/usuario/tv-flexdan.git
+   cd tv-flexdan
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+2. **Instalar dependencias de PHP:**
+   ```bash
+   composer install
+   ```
+   o si usas Sail:
+   ```bash
+   ./vendor/bin/sail composer install
+   ```
 
-## License
+3. **Configurar el entorno:**
+   ```bash
+   cp .env.example .env
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+4. **Generar la clave de la aplicación:**
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Instalar dependencias de Frontend:**
+   ```bash
+   npm install
+   ```
+
+6. **Compilar assets:**
+   ```bash
+   npm run dev
+   ```
+
+---
+
+## Levantar el Proyecto en Local
+
+Si utilizas **Laravel Sail (Docker)**:
+```bash
+./vendor/bin/sail up -d
+./vendor/bin/sail npm run dev
+```
+
+Si prefieres usar los servidores locales:
+```bash
+php artisan serve
+npm run dev
+```
+La aplicación estará disponible en `http://localhost`.
+
+---
+
+## Variables de Entorno
+
+El proyecto requiere configurar las siguientes variables en tu archivo `.env`:
+
+```env
+# Configuración de TMDB (Obligatoria para ver películas/series)
+TMDB_API_KEY=tu_api_key_aqui
+TMDB_BASE_URL=https://api.themoviedb.org/3
+TMDB_IMAGE_BASE_URL=https://image.tmdb.org/t/p
+TMDB_CACHE_TTL=7200
+```
+> [!IMPORTANT]  
+> Sin una `TMDB_API_KEY` válida, las secciones de películas y series no mostrarán contenido real. Puedes obtener una gratis en [themoviedb.org](https://www.themoviedb.org).
+
+---
+
+## Estructura del Proyecto (Resumen)
+
+- **`app/Services/TMDBService.php`**: Lógica central para interactuar con TMDB y manejo de caché.
+- **`app/Livewire/`**: Contiene todos los componentes interactivos (Hero, Carousels, Grids, Details).
+- **`app/Data/Channels.php`**: Fuente de datos estática para los canales de TV argentinos.
+- **`resources/views/components/layouts/app.blade.php`**: Layout principal con diseño Dark Mode.
+- **`tailwind.config.js`**: Configuración personalizada con colores de marca y fuentes.
+
+---
+
+## Uso de APIs Externas
+
+Este proyecto utiliza la API de **The Movie Database (TMDB)** exclusivamente para la obtención de metadatos (pósters, sinopsis, reparto). 
+- **No se realiza streaming de video.**
+- Los enlaces o botones de "reproducir" son puramente estéticos o de carácter demostrativo.
+
+---
+
+## Consideraciones Legales
+
+- **Fin Educativo**: Este proyecto fue creado con fines de aprendizaje y demostración técnica.
+- **Sin Fines de Lucro**: No se debe utilizar para fines comerciales.
+- **Derechos de Autor**: Todos los logotipos de canales y pósters de películas son propiedad de sus respectivos dueños.
+
+---
+
+## Próximas Mejoras
+
+- [ ] Implementación de un sistema de "Mi Lista" (Watchlist) persistente en DB.
+- [ ] Autenticación de usuarios y perfiles personalizados.
+- [ ] Búsqueda global de contenido.
+- [ ] Integración de trailers reales mediante embeds de YouTube.
+
+---
+
+## Autor / Créditos
+
+- **Proyecto**: Tv FlexDan
+- **Inspiración**: Netflix / Laravel Branding
+- **Desarrollado con ❤️ usando Laravel y Livewire.**
