@@ -1,0 +1,48 @@
+{
+  "name": "Laravel Branding",
+  "version": "1.0.0",
+  "colors": {
+    "primary": {
+      "base": "#FF2D20",
+      "light": "#FF4D42",
+      "dark": "#E0251B"
+    },
+    "neutral": {
+      "black": "#0F172A",
+      "darkGray": "#1E293B",
+      "gray": "#475569",
+      "lightGray": "#94A3B8",
+      "white": "#FFFFFF"
+    },
+    "background": {
+      "main": "#F8FAFC",
+      "dark": "#0F172A",
+      "card": "#FFFFFF"
+    }
+  },
+  "typography": {
+    "fontFamily": "'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif",
+    "weights": {
+      "normal": "400",
+      "medium": "500",
+      "semibold": "600",
+      "bold": "700"
+    }
+  },
+  "styling": {
+    "borderRadius": {
+      "sm": "0.125rem",
+      "base": "0.375rem",
+      "md": "0.5rem",
+      "lg": "0.75rem",
+      "xl": "1rem",
+      "full": "9999px"
+    },
+    "shadows": {
+      "sm": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+      "base": "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
+      "md": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+      "lg": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)"
+    }
+  }
+}

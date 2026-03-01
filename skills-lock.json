@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "skills": {
+    "laravel-best-practices": {
+      "source": "asyrafhussin/agent-skills",
+      "sourceType": "github",
+      "computedHash": "82fd2887e1b49b46230325fa16e0a1e4f4d20a9dca7a2cef510d5b26ea3695e7"
+    },
+    "tailwindcss-development": {
+      "source": "laravel/boost",
+      "sourceType": "github",
+      "computedHash": "4224c7cc951e67fad008c85b68105df092d78b3365fd86339de4698a3e481292"
+    }
+  }
+}
